@@ -9,13 +9,3 @@
 @section('content')
     ...
 @endsection
-
-@section('css')
-    <link rel="stylesheet" href="/assets/css/custom.css" />
-@endsection
-
-@section('js')
-    <script>
-        alert("RODANDO!");
-    </script>
-@endsection

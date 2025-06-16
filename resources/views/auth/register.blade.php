@@ -1,4 +1,8 @@
-<x-guest-layout>
+@extends('adminlte::auth.register')
+
+@section('title','Cadastrar')
+
+{{-- <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -49,4 +53,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}
