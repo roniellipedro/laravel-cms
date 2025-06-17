@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
+    Route::post('/painel/users/store', [UserController::class, 'store'])->name('users.store');
     Route::get('/painel/users/create', [UserController::class, 'create'])->name('users.create');
     Route::get('/painel/users/destroy/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('/painel/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
