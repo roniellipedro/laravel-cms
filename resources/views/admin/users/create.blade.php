@@ -12,70 +12,70 @@
 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <ul class="mb-0">
+            <div class="mb-0">
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <i class="icon fas fa-ban"></i>
+                    <span>{{ $error }}</span>
+                    <br>
                 @endforeach
-            </ul>
+            </div>
         </div>
 
     @endif
 
-    <form action="{{ route('users.store') }}" method="POST" class="form-horizontal">
-        @csrf
-        <div class="card-body">
-            <div class="form-group">
-                <div class="row">
-
-                    <div class="col-sm-6">
+    <div class="card">
+        <form action="{{ route('users.store') }}" method="POST" class="form-horizontal">
+            @csrf
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">
                         Nome Completo
-
-                        <input type="text" name="name" value="{{ old('name') }}" class="form-control">
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" name="name" value="{{ old('name') }}"
+                            class="form-control @error('name') is-invalid @enderror">
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="row">
-
-                    <div class="col-sm-6">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">
                         E-mail
-
-                        <input type="email" name="email" value="{{ old('email') }}"class="form-control">
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="email" name="email" value="{{ old('email') }}"
+                            class="form-control @error('email') is-invalid @enderror">
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="row">
-
-                    <div class="col-sm-6">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">
                         Senha
-
-                        <input type="password" name="password" class="form-control">
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">
                         Confirmação da Senha
-                        <input type="password" name="password_confirmation" class="form-control">
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="password" name="password_confirmation"
+                            class="form-control @error('password_confirmation') is-invalid @enderror">
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="row">
-
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">
+                    </label>
                     <div class="col-sm-6 ">
-                        <input type="submit" value="Cadastrar" class="btn btn-success form-control">
+                        <input type="submit" value="Cadastrar" class="btn btn-success ">
                     </div>
                 </div>
-            </div>
 
-        </div>
-    </form>
+            </div>
+        </form>
+    </div>
 
 @endsection

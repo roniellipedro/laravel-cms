@@ -11,24 +11,25 @@
 
 @section('content')
 
-    <table class="table table-hover">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>Ações</th>
-        </tr>
-        @foreach ($users as $user)
+    <div class="card">
+        <table class="table table-hover">
             <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>
-                    <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-info">Editar</a>
-                    <a href="{{ route('users.destroy', ['id' => $user->id]) }}" class="btn btn-sm btn-danger">Excluir</a>
-                </td>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Ações</th>
             </tr>
-        @endforeach
-    </table>
-
+            @foreach ($users as $user)
+                <tr>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>
+                        <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-info">Editar</a>
+                        <a href="{{ route('users.destroy', ['id' => $user->id]) }}" class="btn btn-sm btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
 @endsection
