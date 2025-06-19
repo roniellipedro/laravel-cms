@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data['users'] = User::paginate(1);
+        $data['users'] = User::paginate(10);
         return view('admin.users.index', $data);
     }
 
@@ -55,17 +55,20 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+
+        if ($user) {
+            return view('admin.users.edit', ['user' => $user]);
+        } else {
+            return redirect(route('painel'));
+        }
     }
 
     /**
@@ -73,7 +76,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return "RECEBENDO DADOS ...";
     }
 
     /**
