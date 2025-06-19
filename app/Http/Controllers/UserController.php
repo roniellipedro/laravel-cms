@@ -66,9 +66,8 @@ class UserController extends Controller
 
         if ($user) {
             return view('admin.users.edit', ['user' => $user]);
-        } else {
-            return redirect(route('painel'));
         }
+        return redirect(route('painel'));
     }
 
     /**
@@ -76,7 +75,45 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return "RECEBENDO DADOS ...";
+        $user = User::find($id);
+
+        if ($user) {
+
+            $data = $request->only([
+                'name',
+                'email',
+                'password',
+                'password_confirmation'
+            ]);
+
+            $validator = Validator::make([
+                'name' => $data['name'],
+                'email' => $data['email']
+            ], [
+                'name' => ['required', 'string', 'max:100'],
+                'email' => ['required', 'string', 'email', 'max:100']
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->route('users.edit', [
+                    'id' => $id
+                ])->withErrors($validator);
+            }
+
+            $user->name = $data['name'];
+
+            if ($user->email != $data['email']) {
+                $hasEmail = User::where('email', $data['email'])->get();
+
+                if (count($hasEmail) === 0) {
+                    $user->email = $data['email'];
+                }
+            }
+
+            // $user->save();
+        }
+
+        // return redirect(route('painel'));
     }
 
     /**
