@@ -150,6 +150,17 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+
+        $loggedId = Auth::id();
+
+        if ($user) {
+            if ($loggedId !== $user->id) {
+                $user->delete();
+            }
+        }
+
+
+        return redirect(route('painel.users'));
     }
 }
