@@ -86,19 +86,17 @@ class UserController extends Controller
                 'password_confirmation'
             ]);
 
-            $validator = Validator::make([
-                'name' => $data['name'],
-                'email' => $data['email']
-            ], [
-                'name' => ['required', 'string', 'max:100'],
-                'email' => ['required', 'string', 'email', 'max:100']
-            ]);
+            $validator = Validator::make(
+                [
+                    'name' => $data['name'],
+                    'email' => $data['email']
+                ],
+                [
+                    'name' => ['required', 'string', 'max:100'],
+                    'email' => ['required', 'string', 'email', 'max:100']
+                ]
+            );
 
-            if ($validator->fails()) {
-                return redirect()->route('users.edit', [
-                    'id' => $id
-                ])->withErrors($validator);
-            }
 
             $user->name = $data['name'];
 
@@ -107,13 +105,44 @@ class UserController extends Controller
 
                 if (count($hasEmail) === 0) {
                     $user->email = $data['email'];
+                } else {
+                    $validator->errors()->add('email', __('validation.unique', [
+                        'attribute' => 'email'
+                    ]));
+
+                    // return redirect()->route('users.edit', ['id' => $id])
+                    //     ->withErrors($validator)
+                    //     ->withInput();
                 }
             }
 
-            // $user->save();
+            if (!empty($data['password'])) {
+                if (strlen($data['password']) >= 8) {
+                    if ($data['password'] === $data['password_confirmation']) {
+                        $user->password = Hash::make($data['password']);
+                    } else {
+                        $validator->errors()->add('password', __('validation.confirmed', [
+                            'attribute' => 'password'
+                        ]));
+                    }
+                } else {
+                    $validator->errors()->add('password', __('validation.min.string', [
+                        'attribute' => 'password',
+                        'min' => 8
+                    ]));
+                }
+            }
+
+            if (count($validator->errors()) > 0) {
+                return redirect()->route('users.edit', [
+                    'id' => $id
+                ])->withErrors($validator);
+            }
+
+            $user->save();
         }
 
-        // return redirect(route('painel'));
+        return redirect(route('painel.users'));
     }
 
     /**
