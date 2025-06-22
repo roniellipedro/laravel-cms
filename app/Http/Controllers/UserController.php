@@ -18,6 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $data['loggedId'] = Auth::id();
         $data['users'] = User::paginate(10);
         return view('admin.users.index', $data);
     }
@@ -109,10 +110,6 @@ class UserController extends Controller
                     $validator->errors()->add('email', __('validation.unique', [
                         'attribute' => 'email'
                     ]));
-
-                    // return redirect()->route('users.edit', ['id' => $id])
-                    //     ->withErrors($validator)
-                    //     ->withInput();
                 }
             }
 

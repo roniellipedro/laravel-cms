@@ -29,17 +29,17 @@
                         <td>{{ $user->email }}</td>
                         <td>
                             <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-info">Editar</a>
-
-                            {{-- @if (Auth::User()->id != $user->id) --}}
-                            <form class="d-inline" method="POST" action="{{ route('users.destroy', ['id' => $user->id]) }}"
-                                onsubmit="return confirm('Tem certeza que deseja excluir?')">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-sm btn-danger">
-                                    Excluir
-                                </button>
-                            </form>
-                            {{-- @endif --}}
+                            @if ($loggedId != $user->id)
+                                <form class="d-inline" method="POST"
+                                    action="{{ route('users.destroy', ['id' => $user->id]) }}"
+                                    onsubmit="return confirm('Tem certeza que deseja excluir?')">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-sm btn-danger">
+                                        Excluir
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
