@@ -20,7 +20,14 @@
                 @endforeach
             </div>
         </div>
+    @endif
 
+    @if (session('warning'))
+        <div class="alert alert-success">
+            <div class="mb-0">
+                {{ session('warning') }}
+            </div>
+        </div>
     @endif
 
     <div class="card">

@@ -137,6 +137,9 @@ class UserController extends Controller
             }
 
             $user->save();
+
+            return redirect(route('users.edit', ['id' => $id]))
+                ->with('warning', 'Informações alteradas com sucesso!');
         }
 
         return redirect(route('painel.users'));
