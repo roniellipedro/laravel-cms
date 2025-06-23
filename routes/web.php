@@ -14,11 +14,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/painel/users/store', [UserController::class, 'store'])->name('users.store');
     Route::get('/painel/users/create', [UserController::class, 'create'])->name('users.create');
     Route::get('/painel/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-    Route::get('/painel/users', [UserController::class, 'index'])->name('painel.users');
     Route::get('/painel', [AdminController::class, 'index'])->name('painel');
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('can:edit-users')->group(function () {
+    Route::get('/painel/users', [UserController::class, 'index'])->name('painel.users');
 });
 
 require __DIR__ . '/auth.php';
