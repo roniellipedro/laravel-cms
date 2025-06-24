@@ -10,6 +10,8 @@
 
 @section('content')
 
+    @php($tinymceKey = config('services.tinymce.key'));
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <div class="mb-0">
@@ -50,7 +52,7 @@
                         Corpo
                     </label>
                     <div class="col-sm-10">
-                        <textarea name="body" class="form-control">{{ $page->body }}</textarea>
+                        <textarea name="body" class="form-control bodyfield">{{ $page->body }}</textarea>
                     </div>
                 </div>
 
@@ -66,4 +68,11 @@
         </form>
     </div>
 
+    <script src="https://cdn.tiny.cloud/1/{{ $tinymceKey }}/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea.bodyfield',
+            height: 300
+        });
+    </script>
 @endsection
