@@ -20,7 +20,7 @@ Route::middleware('auth')->prefix('painel')->group(function () {
     Route::put('/settings/save', [SettingController::class, 'save'])->name('settings.save');
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 
-    Route::get('/pages/destroy', [PageController::class, 'destroy'])->name('pages.destroy');
+    Route::delete('/pages/destroy/{id}', [PageController::class, 'destroy'])->name('pages.destroy');
     Route::put('/pages/update/{id}', [PageController::class, 'update'])->name('pages.update');
     Route::get('/pages/edit/{id}', [PageController::class, 'edit'])->name('pages.edit');
     Route::post('/pages/store', [PageController::class, 'store'])->name('pages.store');

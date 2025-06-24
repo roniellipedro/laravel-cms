@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use illuminate\Support\Str;
 
@@ -139,6 +140,12 @@ class PageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $page = Page::find($id);
+
+        if ($page) {
+            $page->delete();
+        }
+
+        return redirect(route('pages'));
     }
 }
