@@ -17,6 +17,7 @@ Route::middleware('auth')->prefix('painel')->group(function () {
     Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/settings/save', [SettingController::class, 'save'])->name('settings.save');
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+    Route::get('/pages/create', [PageController::class, 'create'])->name('pages.create');
     Route::get('/pages', [PageController::class, 'index'])->name('pages');
 });
 

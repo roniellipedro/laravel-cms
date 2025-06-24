@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -11,7 +12,9 @@ class PageController extends Controller
      */
     public function index()
     {
-        echo "CHEGAMO";
+        $pages = Page::paginate(10);
+
+        return view('admin.pages.index', ['pages' => $pages]);
     }
 
     /**
