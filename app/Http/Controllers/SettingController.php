@@ -42,7 +42,13 @@ class SettingController extends Controller
                 ->withErrors($validator);
         }
 
-        echo 'salvando';
+        foreach ($data as $item => $value) {
+            Setting::where('name', $item)->update([
+                'content' => $value
+            ]);
+        }
+
+        return redirect(route('settings'))->with('warning', 'Informações alteradas com sucesso!');
     }
 
     protected function validator($data)
