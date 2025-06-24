@@ -21,7 +21,8 @@ Route::middleware('auth')->prefix('painel')->group(function () {
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 
     Route::get('/pages/destroy', [PageController::class, 'destroy'])->name('pages.destroy');
-    Route::get('/pages/edit', [PageController::class, 'edit'])->name('pages.edit');
+    Route::put('/pages/update/{id}', [PageController::class, 'update'])->name('pages.update');
+    Route::get('/pages/edit/{id}', [PageController::class, 'edit'])->name('pages.edit');
     Route::post('/pages/store', [PageController::class, 'store'])->name('pages.store');
     Route::get('/pages/create', [PageController::class, 'create'])->name('pages.create');
     Route::get('/pages', [PageController::class, 'index'])->name('pages');
