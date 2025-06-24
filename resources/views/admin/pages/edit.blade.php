@@ -10,7 +10,7 @@
 
 @section('content')
 
-    @php($tinymceKey = config('services.tinymce.key'));
+    @php($tinymceKey = config('services.tinymce.key'))
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -72,7 +72,14 @@
     <script>
         tinymce.init({
             selector: 'textarea.bodyfield',
-            height: 300
+            height: 300,
+            menubar: false,
+            statusbar: false,
+            plugins: ['link', 'table', 'image', 'autoresize', 'lists'],
+            toolbar: 'undo redo | blocks | bold italic backcolor | alignleft aligncenter alignright alignjustify | table | link image | bullist numlist',
+            content_css: [
+                '{{ asset('assets/css/content.css') }}'
+            ]
         });
     </script>
 @endsection
