@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
 // use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -10,13 +11,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware('auth')->prefix('painel')->group(function () {
-
     Route::get('/', [AdminController::class, 'index'])->name('painel');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/settings/save', [SettingController::class, 'save'])->name('settings.save');
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 });
 
 Route::middleware('can:edit-users')->prefix('painel')->group(function () {
