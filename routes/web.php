@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 // use App\Http\Controllers\ProfileController;
@@ -16,6 +17,7 @@ Route::middleware('auth')->prefix('painel')->group(function () {
     Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/settings/save', [SettingController::class, 'save'])->name('settings.save');
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+    Route::get('/pages', [PageController::class, 'index'])->name('pages');
 });
 
 Route::middleware('can:edit-users')->prefix('painel')->group(function () {
