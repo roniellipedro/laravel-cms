@@ -15,9 +15,9 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th width="50">ID</th>
                     <th>Título</th>
-                    <th>Ações</th>
+                    <th width="250">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +26,8 @@
                         <td>{{ $page->id }}</td>
                         <td>{{ $page->title }}</td>
                         <td>
+                            <a href="" target="_blank" class="btn btn-sm btn-success">Visualizar</a>
+
                             <a href="{{ route('pages.edit', ['id' => $page->id]) }}" class="btn btn-sm btn-info">Editar</a>
 
                             <form class="d-inline" method="POST" action="{{ route('pages.destroy', ['id' => $page->id]) }}"

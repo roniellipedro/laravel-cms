@@ -32,7 +32,7 @@
                         Título
                     </label>
                     <div class="col-sm-10">
-                        <input type="text" name="name" value="{{ old('title') }}"
+                        <input type="text" name="title" value="{{ old('title') }}"
                             class="form-control @error('title') is-invalid @enderror">
                     </div>
                 </div>

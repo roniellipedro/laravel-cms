@@ -13,11 +13,16 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware('auth')->prefix('painel')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('painel');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+
     Route::put('/settings/save', [SettingController::class, 'save'])->name('settings.save');
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
-    Route::get('/pages/store', [PageController::class, 'store'])->name('pages.store');
+
+    Route::get('/pages/destroy', [PageController::class, 'destroy'])->name('pages.destroy');
+    Route::get('/pages/edit', [PageController::class, 'edit'])->name('pages.edit');
+    Route::post('/pages/store', [PageController::class, 'store'])->name('pages.store');
     Route::get('/pages/create', [PageController::class, 'create'])->name('pages.create');
     Route::get('/pages', [PageController::class, 'index'])->name('pages');
 });
