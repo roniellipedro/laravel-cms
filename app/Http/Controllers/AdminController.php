@@ -23,11 +23,18 @@ class AdminController extends Controller
         $dateList = Visitor::select('ip')->where('date_access', '>=', $datelimit)->groupBy('ip')->get();
         $data['onlineCount'] = count($dateList);
 
-
         $data['pageCount'] = Page::count();
 
         $data['userCount'] = User::count();
 
+        $pagePie = [
+            'Teste 1' => 100,
+            'Teste 2' => 200,
+            'Teste 3' => 300
+        ];
+
+        $data['pageLabels'] = json_encode(array_keys($pagePie));
+        $data['pageValues'] = json_encode(array_values($pagePie));
 
         return view('admin.home', $data);
     }
