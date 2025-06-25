@@ -27,11 +27,11 @@ class AdminController extends Controller
 
         $data['userCount'] = User::count();
 
-        $pagePie = [
-            'Teste 1' => 100,
-            'Teste 2' => 200,
-            'Teste 3' => 300
-        ];
+        $pagePie = [];
+        $visitsAll = Visitor::selectRaw('page, count(page) as c')->groupBy('page')->get();
+        foreach ($visitsAll as $visit) {
+            $pagePie[$visit['page']] = intval($visit['c']);
+        }
 
         $data['pageLabels'] = json_encode(array_keys($pagePie));
         $data['pageValues'] = json_encode(array_values($pagePie));
