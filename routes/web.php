@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::middleware('auth')->prefix('painel')->group(function () {
+
+    Route::get('/filter', [AdminController::class, 'filterDate'])->name('painel.filter');
     Route::get('/', [AdminController::class, 'index'])->name('painel');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

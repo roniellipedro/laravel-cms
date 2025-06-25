@@ -5,7 +5,26 @@
 @section('title', 'Painel')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Dashboard</h1>
+        </div>
+
+        <div class="col-md-6">
+            <div class="float-md-right">
+                <form action="{{ route('painel.filter') }}">
+                    <label>Data inicial</label>
+                    <input name="start_date" type="date" name=""
+                        value="{{ !empty($start_date) ? $start_date : date('Y-m-d') }}">
+                    <label>Data final</label>
+                    <input name="end_date" type="date" name=""
+                        value="{{ !empty($end_date) ? $end_date : date('Y-m-d') }}">
+                    <input type="submit" value="Filtrar">
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('content')
