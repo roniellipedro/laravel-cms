@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-md-6 d-flex justify-content-md-end">
-            <form action="{{ route('painel.filter') }}" class="form-inline flex-nowrap w-auto">
+            <form action="{{ route('painel') }}" class="form-inline flex-nowrap w-auto">
                 <label for="start_date" class="mr-2 mb-0 font-weight-bold">Data inicial</label>
                 <input id="start_date" name="start_date" type="date" class="form-control mr-3"
                     value="{{ old('start_date', $start_date ?? date('Y-m-d')) }}" required>
