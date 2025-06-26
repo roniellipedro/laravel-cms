@@ -5,24 +5,25 @@
 @section('title', 'Painel')
 
 @section('content_header')
-
-    <div class="row">
+    <div class="row align-items-center mb-4">
         <div class="col-md-6">
-            <h1>Dashboard</h1>
+            <h1 class="mb-0">Dashboard</h1>
         </div>
 
-        <div class="col-md-6">
-            <div class="float-md-right">
-                <form action="{{ route('painel.filter') }}">
-                    <label>Data inicial</label>
-                    <input name="start_date" type="date" name=""
-                        value="{{ !empty($start_date) ? $start_date : date('Y-m-d') }}">
-                    <label>Data final</label>
-                    <input name="end_date" type="date" name=""
-                        value="{{ !empty($end_date) ? $end_date : date('Y-m-d') }}">
-                    <input type="submit" value="Filtrar">
-                </form>
-            </div>
+        <div class="col-md-6 d-flex justify-content-md-end">
+            <form action="{{ route('painel.filter') }}" class="form-inline flex-nowrap w-auto">
+                <label for="start_date" class="mr-2 mb-0 font-weight-bold">Data inicial</label>
+                <input id="start_date" name="start_date" type="date" class="form-control mr-3"
+                    value="{{ old('start_date', $start_date ?? date('Y-m-d')) }}" required>
+
+                <label for="end_date" class="mr-2 mb-0 font-weight-bold">Data final</label>
+                <input id="end_date" name="end_date" type="date" class="form-control mr-3"
+                    value="{{ old('end_date', $end_date ?? date('Y-m-d')) }}" required>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-filter mr-1"></i> Filtrar
+                </button>
+            </form>
         </div>
     </div>
 @endsection
