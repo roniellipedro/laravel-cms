@@ -17,7 +17,12 @@ class AdminController extends Controller
 
     public function index()
     {
-        $data['visitsCount'] = Visitor::count();
+        $data['start_date'] = date('Y-m-d');
+        $data['end_date'] = date('Y-m-d');
+
+        $data['visitsCount'] = count(Visitor::where('date_access', '>=', $data['start_date'])
+            ->where('date_access', '<=', $data['end_date'])
+            ->get());
 
         $datelimit = date('Y-m-s H:i:s', strtotime('-5 minutes'));
         $dateList = Visitor::select('ip')->where('date_access', '>=', $datelimit)->groupBy('ip')->get();
@@ -27,8 +32,15 @@ class AdminController extends Controller
 
         $data['userCount'] = User::count();
 
+
+
         $pagePie = [];
-        $visitsAll = Visitor::selectRaw('page, count(page) as c')->groupBy('page')->get();
+        $visitsAll = Visitor::selectRaw('page, count(page) as c')
+            ->where('date_access', '>=', $data['start_date'])
+            ->where('date_access', '<=', $data['end_date'])
+            ->groupBy('page')
+            ->get();
+
         foreach ($visitsAll as $visit) {
             $pagePie[$visit['page']] = intval($visit['c']);
         }
@@ -41,13 +53,12 @@ class AdminController extends Controller
 
     public function filterDate(Request $request)
     {
-
         $date = $request->only([
             'start_date',
             'end_date'
         ]);
 
-        if (!empty($date['start_date']) || !empty($date['end_date'])) {
+        if (!empty($date['start_date']) && !empty($date['end_date'])) {
             $data['start_date'] = $request->start_date;
             $data['end_date'] = $request->end_date;
         } else {
@@ -67,9 +78,12 @@ class AdminController extends Controller
 
         $data['userCount'] = User::count();
 
-        //
         $pagePie = [];
-        $visitsAll = Visitor::selectRaw('page, count(page) as c')->groupBy('page')->get();
+        $visitsAll = Visitor::selectRaw('page, count(page) as c')
+            ->where('date_access', '>=', $data['start_date'])
+            ->where('date_access', '<=', $data['end_date'])
+            ->groupBy('page')
+            ->get();
         foreach ($visitsAll as $visit) {
             $pagePie[$visit['page']] = intval($visit['c']);
         }
