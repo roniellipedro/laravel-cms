@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use illuminate\Support\Str;
 
-class PageController extends Controller
+class AdminPageController extends Controller
 {
     /**
      * Display a listing of the resource.

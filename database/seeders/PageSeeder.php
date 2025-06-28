@@ -15,19 +15,19 @@ class PageSeeder extends Seeder
     {
         Page::create([
             'title' => 'página 1',
-            'slug' => 'página 1',
+            'slug' => 'pagina-1',
             'body' => 'página 1'
         ]);
 
         Page::create([
             'title' => 'página 2',
-            'slug' => 'página 2',
+            'slug' => 'pagina-2',
             'body' => 'página 2'
         ]);
 
         Page::create([
             'title' => 'página 3',
-            'slug' => 'página 3',
+            'slug' => 'pagina-3',
             'body' => 'página 3'
         ]);
     }
