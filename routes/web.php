@@ -9,7 +9,7 @@ use App\Http\Controllers\SitePageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::middleware('auth')->prefix('painel')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('painel');

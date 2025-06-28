@@ -53,7 +53,17 @@
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                            <div class="Appointment">
+                                <div class="book_btn d-none d-lg-block">
+                                    @auth
+                                        <a href="{{ route('painel') }}">Acessar Painel</a>
+                                    @endauth
+                                    @guest
+                                        <a href="{{ route('login') }}">Login</a>
+                                    @endguest
 
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12">
                             <div class="mobile_menu d-block d-lg-none"></div>

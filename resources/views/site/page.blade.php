@@ -16,4 +16,8 @@
         </div>
     </div>
     <!-- /bradcam_area  -->
+
+    <div class="container my-4">
+        {!! $page->body !!}
+    </div>
 @endsection
